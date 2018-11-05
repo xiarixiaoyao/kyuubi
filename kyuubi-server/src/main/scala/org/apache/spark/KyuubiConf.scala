@@ -357,6 +357,19 @@ object KyuubiConf {
       .timeConf(TimeUnit.MILLISECONDS)
       .createWithDefault(TimeUnit.SECONDS.toMillis(60L))
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  //               Experimental Feature NOT Supported by Spark Directly                          //
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  val SECURED_SESSION_LONG_CACHE: ConfigEntry[Boolean] =
+    KyuubiConfigBuilder("spark.kyuubi.experimental.secured.session.long.cache")
+      .doc("Experimental: turn on session long caching in kerberized cluster. This allows Spark " +
+        "to do credential updating which may lead to Token mis-loading in Spark driver side. A " +
+        "suggested solution is to modify Spark source code to turn off driver side credential " +
+        "updating")
+      .booleanConf
+      .createWithDefault(false)
+
   /**
    * Return all the configuration definitions that have been defined in [[KyuubiConf]]. Each
    * definition contains key, defaultValue.
